@@ -41,7 +41,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
-import static org.apache.ignite.cache.hibernate.HibernateAccessStrategyFactory.DFLT_CACHE_NAME_PROPERTY;
 import static org.apache.ignite.cache.hibernate.HibernateL2CacheSelfTest.CONNECTION_URL;
 import static org.apache.ignite.cache.hibernate.HibernateL2CacheSelfTest.hibernateProperties;
 import static org.hibernate.cache.spi.access.AccessType.NONSTRICT_READ_WRITE;
@@ -229,7 +228,6 @@ public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
                 builder.applySetting(e.getKey(), e.getValue());
 
             builder.applySetting("hibernate.connection.url", CONNECTION_URL);
-            builder.applySetting(DFLT_CACHE_NAME_PROPERTY, CACHE_NAME);
 
             MetadataSources metadataSources = new MetadataSources(builder.build());
 

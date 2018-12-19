@@ -41,7 +41,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static org.apache.ignite.cache.CacheWriteSynchronizationMode.FULL_SYNC;
-import static org.apache.ignite.cache.hibernate.HibernateAccessStrategyFactory.DFLT_CACHE_NAME_PROPERTY;
 import static org.apache.ignite.cache.hibernate.HibernateL2CacheSelfTest.CONNECTION_URL;
 import static org.apache.ignite.cache.hibernate.HibernateL2CacheSelfTest.hibernateProperties;
 import static org.hibernate.cache.spi.access.AccessType.NONSTRICT_READ_WRITE;
@@ -245,8 +244,6 @@ public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
 
             for (Map.Entry<String, String> e : hibernateProperties(nodeName, NONSTRICT_READ_WRITE.name()).entrySet())
                 cfg.setProperty(e.getKey(), e.getValue());
-
-            cfg.setProperty(DFLT_CACHE_NAME_PROPERTY, CACHE_NAME);
 
             return cfg;
         }
