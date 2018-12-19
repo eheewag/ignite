@@ -55,35 +55,35 @@ public abstract class IgniteCachedDomainDataAccess extends HibernateRegion imple
     }
 
     /** {@inheritDoc} */
-    @Override public Object get(SharedSessionContractImplementor sess, Object key) throws CacheException {
+    @Override public Object get(SharedSessionContractImplementor ses, Object key) throws CacheException {
         return stgy.get(key);
     }
 
     /** {@inheritDoc} */
-    @Override public boolean putFromLoad(SharedSessionContractImplementor sess, Object key, Object value, Object version) throws CacheException {
+    @Override public boolean putFromLoad(SharedSessionContractImplementor ses, Object key, Object value, Object version) throws CacheException {
         stgy.putFromLoad(key, value);
         return true;
     }
 
     /** {@inheritDoc} */
-    @Override public boolean putFromLoad(SharedSessionContractImplementor sess, Object key, Object value, Object version, boolean minimalPutOverride) throws CacheException {
+    @Override public boolean putFromLoad(SharedSessionContractImplementor ses, Object key, Object value, Object version, boolean minimalPutOverride) throws CacheException {
         stgy.putFromLoad(key, value);
         return true;
     }
 
     /** {@inheritDoc} */
-    @Override public SoftLock lockItem(SharedSessionContractImplementor sess, Object key, Object version) throws CacheException {
+    @Override public SoftLock lockItem(SharedSessionContractImplementor ses, Object key, Object version) throws CacheException {
         stgy.lock(key);
         return null;
     }
 
     /** {@inheritDoc} */
-    @Override public void unlockItem(SharedSessionContractImplementor sess, Object key, SoftLock lock) throws CacheException {
+    @Override public void unlockItem(SharedSessionContractImplementor ses, Object key, SoftLock lock) throws CacheException {
         stgy.unlock(key);
     }
 
     /** {@inheritDoc} */
-    @Override public void remove(SharedSessionContractImplementor sess, Object key) throws CacheException {
+    @Override public void remove(SharedSessionContractImplementor ses, Object key) throws CacheException {
         stgy.remove(key);
     }
 
@@ -100,7 +100,7 @@ public abstract class IgniteCachedDomainDataAccess extends HibernateRegion imple
     }
 
     /** {@inheritDoc} */
-    @Override public void removeAll(SharedSessionContractImplementor sess) throws CacheException {
+    @Override public void removeAll(SharedSessionContractImplementor ses) throws CacheException {
         stgy.removeAll();
     }
 

@@ -54,22 +54,22 @@ public class IgniteEntityDataAccess extends IgniteCachedDomainDataAccess impleme
     }
 
     /** */
-    @Override public boolean insert(SharedSessionContractImplementor sess, Object key, Object val, Object ver) {
+    @Override public boolean insert(SharedSessionContractImplementor ses, Object key, Object val, Object ver) {
         return stgy.insert(key, val);
     }
 
     /** */
-    @Override public boolean afterInsert(SharedSessionContractImplementor sess, Object key, Object val, Object ver) {
+    @Override public boolean afterInsert(SharedSessionContractImplementor ses, Object key, Object val, Object ver) {
         return stgy.afterInsert(key, val);
     }
 
     /** */
-    @Override public boolean update(SharedSessionContractImplementor sess, Object key, Object val, Object curVer, Object prevVer) {
+    @Override public boolean update(SharedSessionContractImplementor ses, Object key, Object val, Object curVer, Object prevVer) {
         return stgy.update(key, val);
     }
 
     /** */
-    @Override public boolean afterUpdate(SharedSessionContractImplementor sess, Object key, Object val, Object curVer, Object prevVer, SoftLock lock) {
+    @Override public boolean afterUpdate(SharedSessionContractImplementor ses, Object key, Object val, Object curVer, Object prevVer, SoftLock lock) {
         return stgy.afterUpdate(key, val);
     }
 
