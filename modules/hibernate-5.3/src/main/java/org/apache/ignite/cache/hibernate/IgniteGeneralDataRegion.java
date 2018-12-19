@@ -19,6 +19,7 @@ package org.apache.ignite.cache.hibernate;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCheckedException;
+import org.apache.ignite.IgniteLogger;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.spi.DirectAccessRegion;
 import org.hibernate.cache.spi.QueryResultsRegion;
@@ -32,6 +33,9 @@ import org.jetbrains.annotations.Nullable;
  * and {@link TimestampsRegion}.
  */
 public class IgniteGeneralDataRegion extends HibernateRegion implements DirectAccessRegion {
+    /** */
+    private final IgniteLogger log;
+
     /**
      * @param factory Region factory.
      * @param name Region name.
@@ -41,12 +45,19 @@ public class IgniteGeneralDataRegion extends HibernateRegion implements DirectAc
     IgniteGeneralDataRegion(RegionFactory factory, String name,
         Ignite ignite, HibernateCacheProxy cache) {
         super(factory, name, ignite, cache);
+
+        log = ignite.log().getLogger(getClass());
     }
 
     /** {@inheritDoc} */
     @Nullable @Override public Object getFromCache(Object key, SharedSessionContractImplementor ses) throws CacheException {
         try {
-            return cache.get(key);
+            Object val = cache.get(key);
+
+            if (log.isDebugEnabled())
+                log.debug("Get [cache=" + cache.name() + ", key=" + key + ", val=" + val + ']');
+
+            return val;
         }
         catch (IgniteCheckedException e) {
             throw new CacheException(e);
@@ -57,6 +68,9 @@ public class IgniteGeneralDataRegion extends HibernateRegion implements DirectAc
     @Override public void putIntoCache(Object key, Object val, SharedSessionContractImplementor ses) throws CacheException {
         try {
             cache.put(key, val);
+
+            if (log.isDebugEnabled())
+                log.debug("Put [cache=" + cache.name() + ", key=" + key + ", val=" + val + ']');
         }
         catch (IgniteCheckedException e) {
             throw new CacheException(e);
