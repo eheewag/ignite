@@ -58,9 +58,6 @@ import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.RootClass;
 import org.hibernate.query.Query;
 import org.hibernate.stat.CacheRegionStatistics;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -507,19 +504,16 @@ public class HibernateL2CacheSelfTest extends GridCommonAbstractTest {
     }
 
     /** {@inheritDoc} */
-    @BeforeClass
     @Override protected void beforeTestsStarted() throws Exception {
         startGrids(2);
     }
 
     /** {@inheritDoc} */
-    @AfterClass
     @Override protected void afterTestsStopped() throws Exception {
         stopAllGrids();
     }
 
     /** {@inheritDoc} */
-    @After
     @Override protected void afterTest() throws Exception {
         cleanup();
     }

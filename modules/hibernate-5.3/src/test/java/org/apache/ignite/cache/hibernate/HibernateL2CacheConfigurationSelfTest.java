@@ -43,9 +43,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cache.spi.access.AccessType;
 import org.hibernate.cfg.Configuration;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -83,19 +80,16 @@ public class HibernateL2CacheConfigurationSelfTest extends GridCommonAbstractTes
     public static final String CONNECTION_URL = "jdbc:h2:mem:example;DB_CLOSE_DELAY=-1";
 
     /** {@inheritDoc} */
-    @BeforeClass
     @Override protected void beforeTestsStarted() throws Exception {
         startGrid(0);
     }
 
     /** {@inheritDoc} */
-    @AfterClass
     @Override protected void afterTestsStopped() throws Exception {
         stopAllGrids();
     }
 
     /** {@inheritDoc} */
-    @After
     @Override protected void afterTest() throws Exception {
         for (IgniteCacheProxy<?, ?> cache : ((IgniteKernal)grid(0)).caches())
             cache.clear();

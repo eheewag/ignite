@@ -36,8 +36,6 @@ import org.hibernate.Transaction;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -55,9 +53,6 @@ import static org.hibernate.cache.spi.access.AccessType.NONSTRICT_READ_WRITE;
  */
 @RunWith(JUnit4.class)
 public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
-    /** */
-    private static final String CACHE_NAME = "hibernateCache";
-
     /** {@inheritDoc} */
     @Override protected IgniteConfiguration getConfiguration(String igniteInstanceName) throws Exception {
         IgniteConfiguration cfg = super.getConfiguration(igniteInstanceName);
@@ -65,9 +60,7 @@ public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
         if (!getTestIgniteInstanceName(0).equals(igniteInstanceName))
             cfg.setClientMode(true);
 
-
         cfg.setCacheConfiguration(
-            cacheConfiguration(CACHE_NAME),
             cacheConfiguration(DEFAULT_UPDATE_TIMESTAMPS_REGION_UNQUALIFIED_NAME),
             cacheConfiguration(Entity1.class.getName()),
             cacheConfiguration(Entity2.class.getName()),
@@ -96,7 +89,6 @@ public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
     }
 
     /** {@inheritDoc} */
-    @BeforeClass
     @Override protected void beforeTestsStarted() throws Exception {
         super.beforeTestsStarted();
 
@@ -107,7 +99,6 @@ public class HibernateL2CacheMultiJvmTest extends GridCommonAbstractTest {
     }
 
     /** {@inheritDoc} */
-    @AfterClass
     @Override protected void afterTestsStopped() throws Exception {
         stopAllGrids();
 
